@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -42,11 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     
     #custom Apps
     'core',
     'userauths',
     'account',
+    "storages",
 ]
 
 MIDDLEWARE = [
@@ -93,6 +96,9 @@ DATABASES = {
     }
 }
 
+# db_from_env = dj_database_url.config(conn_max_age=600)
+# DATABASES['default'].update(db_from_env)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -128,6 +134,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+LOGIN_URL = "userauths:sign-in"
+# LOGIN_REDIRECT_URL = "userauths:sign-in"
+LOGOUT_REDIRECT_URL = "userauths:sign-in"
+
 STATIC_URL = 'static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -151,4 +161,38 @@ JAZZMIN_SETTINGS = {
     #'site_logo': "assets/imgs/theme/logo.svg",
     'copyright': "Paylio-All Rights Reserved @Copyright 2023 ",
     # "order_with_respect__to": ["core", "userauths", "transactions", "addon", "blog"]
+}
+
+
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": True,
+    "brand_small_text": False,
+    "brand_colour": "navbar-indigo",
+    "accent": "accent-olive",
+    "navbar": "navbar-indigo navbar-dark",
+    "no_navbar_border": False,
+    "navbar_fixed": False,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": False,
+    "sidebar": "sidebar-dark-indigo",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "cyborg",
+    "dark_mode_theme": "cyborg",
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    }
 }
